@@ -12,6 +12,8 @@ namespace HashTableAndBinaryTree
         public Binary<T> lefttree { get; set; }
         public Binary<T> righttree { get; set; }
         bool result = false;
+        int leftcount = 0;
+        int rightcount = 0;
 
         public Binary(T nodedata)
         {
@@ -43,13 +45,37 @@ namespace HashTableAndBinaryTree
         {
             if (this.lefttree != null)
             {
+                this.leftcount++;
                 this.lefttree.Display();
             }
             Console.WriteLine(this.nodedata.ToString());
             if (this.righttree != null)
             {
+                this.rightcount++;
                 this.righttree.Display();
             }
+        }
+        public void Size()
+        {
+            Console.WriteLine("Size of Binary Serach Tree " + (1 + leftcount + rightcount));
+        }
+        public bool search(T element, Binary<T> node)
+        {
+            if (node == null)
+                return false;
+            if (node.nodedata.Equals(element))
+            {
+                Console.WriteLine("Element in binary search tree " + node.nodedata);
+                return true;
+            }
+            else
+
+                Console.WriteLine("Current element is {0} in binary search tree ", node.nodedata);
+            if (element.CompareTo(node.nodedata) < 0)
+                search(element, node.lefttree);
+            if (element.CompareTo(node.nodedata) > 0)
+                search(element, node.righttree);
+            return result;
         }
     }
 }
